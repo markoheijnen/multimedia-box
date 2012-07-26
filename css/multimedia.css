@@ -1,0 +1,15 @@
+.multimedia_box { background: #F1F1F1; border: 1px solid #DFDFDF; cursor: pointer; float: left; height: 100px; margin: 0 5px 5px 0; overflow: hidden; position: relative; width: 150px; }
+.multimedia_box:hover { background: #E1E1E1; }
+.multimedia_box_selected img { max-height: 114px; }
+.multimedia_box_selected .remove {background: white; display:block; padding: 1px 0px; text-align: center; width: 100%; position: absolute; bottom: 0px; }
+#poststuff .multimedia_box .multimedia_box_unselected { margin: 0px; }
+.multimedia_box .multimedia_box_unselected { line-height: 100px; margin: 0px; text-align: center; }
+
+.multimedia_box_dialog { padding: 5px 5px !important; }
+.multimedia_box2 { float: left; margin: 0px 5px; min-height: 170px; padding: 0px 5px;  width: 220px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+.multimedia_box_dialog .selected { background: #E1E1E1; }
+.multimedia_box_media { }
+.multimedia_box_mediabutton { padding: 3px 15px; }
+.multimedia_box_youtube { }
+
+.multimedia_box_bottom { clear:both; padding-top: 5px; text-align: center; }
