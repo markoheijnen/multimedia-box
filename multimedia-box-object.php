@@ -78,7 +78,7 @@ class Multimedia_Box_Object {
 		if( $amount == 0 ) {
 			echo '<div id="multimedia_box_' . $this->id . '_addnew" class="multimedia_box addnew">';
 			echo '<input type="hidden" class="multimedia_id" value="' . $this->id . '" />';
-			echo '<p class="multimedia_unselected">' . __( 'Add new item', 'multimedia-box' ) . '</p>';
+			echo '<p class="multimedia_box_unselected">' . __( 'Add new item', 'multimedia-box' ) . '</p>';
 			echo '</div>';
 		}
 
