@@ -16,7 +16,7 @@ require_once 'multimedia-box-object.php';
 
 class Multimedia_Box {
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles_scripts' ), 1 );
 	}
 
 	public function register_styles_scripts() {

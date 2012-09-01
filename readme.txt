@@ -10,11 +10,6 @@ Enable an API to register multimedia box for a specific post type
 
 == Description ==
 
-When you've got lots of post meta-boxes, your post edit screen can become difficult to search. Make your post edit screen easier to navigate and manage by creating a set of tabs, with the Tabify Edit Screen plugin. And manage it all from the WordPress back-end!
-
-The plugin is still in active development, and I'm always looking for ways to improve it. 
-
-Known issue: currently the plugin ignores the "show on screen" values from the Screen options. I'm currently working to fix this issue.
 
 
 == Installation ==
@@ -27,12 +22,10 @@ Known issue: currently the plugin ignores the "show on screen" values from the S
 
 == Screenshots ==
 
-1. How it would look like after enabling this plugin
-2. The settings page where you can manage the tabs for each posttype
 
 == Changelog ==
 
-= 0.1 (2012-4-2) =
+= 0.1 (t.b.a.) =
 * First version to show people the main goal of this plugin
 
 == TODO's ==

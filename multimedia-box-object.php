@@ -25,7 +25,7 @@ class Multimedia_Box_Object {
 			'label' => __( 'Multimedia', 'multimedia-box' ),
 			'post_type' => 'post',
 			'priority' => 'default',
-			'amount' => 3,
+			'amount' => 0,
 			'supports' => array( 'media', 'youtube', 'vimeo' )
 		);
 
