@@ -41,8 +41,7 @@ class Multimedia_Box {
 
 	public function getMedia( $id, $post_id = null ) {
 		if( $post_id == null ) {
-			global $post;
-			$post_id = $post->ID;
+			$post_id = get_the_ID();
 		}
 
 		$media = get_post_meta( $post_id, '_multimedia_box_' . $id, true );
