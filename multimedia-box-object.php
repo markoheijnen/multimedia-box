@@ -17,9 +17,6 @@ class Multimedia_Box_Object {
 		add_action( 'admin_print_styles-post.php', array( &$this, 'load_styles' ) );
 		add_action( 'admin_print_styles-post-new.php', array( &$this, 'load_styles' ) );
 
-		add_action( 'admin_print_scripts-post.php', array( &$this, 'load_scripts' ) );
-		add_action( 'admin_print_scripts-post-new.php', array( &$this, 'load_scripts' ) );
-
 		$defaults = array(
 			'id' => null,
 			'label' => __( 'Multimedia', 'multimedia-box' ),
@@ -52,6 +49,8 @@ class Multimedia_Box_Object {
 		if ( is_object( $post_id ) ) {
 			$post_id = $post_id->ID;
 		}
+
+		$this->load_scripts();
 
 		wp_nonce_field( plugin_basename( __FILE__ ), 'multimedia_box_' . $this->post_type . '_' . $this->id );
 
@@ -197,13 +196,16 @@ class Multimedia_Box_Object {
 		}
 	}
 
-	public function load_scripts () {
-		global $post_type;
+	private function load_scripts () {
 
-		if( $post_type == $this->post_type ) {
 			wp_enqueue_script( 'multimedia-box' );
+
+			if( ! is_admin() ) {
+				$data = array( 'url' => SITECOOKIEPATH );
+				wp_localize_script( 'multimedia-box', 'multimedia_box', $data );
+			}
 		}
-	}
+
 }
 
 ?>

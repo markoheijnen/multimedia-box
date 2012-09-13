@@ -2,7 +2,7 @@
 .multimedia_box:hover { background: #E1E1E1; }
 .multimedia_box_selected img { max-height: 114px; }
 .multimedia_box_selected .remove {background: white; display:block; padding: 1px 0px; text-align: center; width: 100%; position: absolute; bottom: 0px; }
-#poststuff .multimedia_box .multimedia_box_unselected { line-height: 100px; margin: 0px; text-align: center; }
+.multimedia_box .multimedia_box_unselected { line-height: 100px; margin: 0px; text-align: center; }
 
 .multimedia_box_dialog { padding: 5px 5px !important; }
 .multimedia_box2 { float: left; margin: 0px 5px; min-height: 170px; padding: 0px 5px;  width: 220px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
