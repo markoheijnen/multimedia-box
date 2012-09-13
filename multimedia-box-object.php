@@ -197,7 +197,7 @@ class Multimedia_Box_Object {
 	}
 
 	private function load_scripts () {
-
+		if( ! wp_script_is( 'multimedia-box' ) ) {
 			wp_enqueue_script( 'multimedia-box' );
 
 			if( ! is_admin() ) {
@@ -205,7 +205,7 @@ class Multimedia_Box_Object {
 				wp_localize_script( 'multimedia-box', 'multimedia_box', $data );
 			}
 		}
-
+	}
 }
 
 ?>
