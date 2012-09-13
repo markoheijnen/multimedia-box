@@ -16,7 +16,7 @@ require_once 'multimedia-box-object.php';
 
 class Multimedia_Box {
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles_scripts' ), 1 );
+		add_action( 'init', array( &$this, 'register_styles_scripts' ), 1 );
 
 		add_action( 'wp_ajax_multimedia_get_code', array( &$this, 'ajax_get_code' ) );
 		add_action( 'wp_ajax_nopriv_multimedia_get_code', array( &$this, 'ajax_get_code' ) );
