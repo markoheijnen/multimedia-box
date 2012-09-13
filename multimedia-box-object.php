@@ -201,7 +201,7 @@ class Multimedia_Box_Object {
 			wp_enqueue_script( 'multimedia-box' );
 
 			if( ! is_admin() ) {
-				$data = array( 'url' => SITECOOKIEPATH );
+				$data = array( 'url' => SITECOOKIEPATH, 'ajax' => admin_url( 'admin-ajax.php' ) );
 				wp_localize_script( 'multimedia-box', 'multimedia_box', $data );
 			}
 		}

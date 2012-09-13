@@ -279,6 +279,10 @@ jQuery(document).ready(function($) {
 			if( typeof ajaxurl != "undefined" ) {
 				return ajaxurl;
 			}
+
+			if( typeof multimedia_box != "undefined" ) {
+				return multimedia_box.ajax;
+			}
 			
 			return false;
 		}
