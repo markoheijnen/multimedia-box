@@ -17,6 +17,9 @@ require_once 'multimedia-box-object.php';
 class Multimedia_Box {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles_scripts' ), 1 );
+
+		add_action( 'wp_ajax_multimedia_get_code', array( &$this, 'ajax_get_code' ) );
+		add_action( 'wp_ajax_nopriv_multimedia_get_code', array( &$this, 'ajax_get_code' ) );
 	}
 
 	public function register_styles_scripts() {
@@ -110,6 +113,28 @@ class Multimedia_Box {
 		$url .= '?' . http_build_query( $query, '', '&amp;' );	
 
 		return '<iframe width="' . intval( $args['width'] ) . '" height="'. intval( $args['height'] ) . '" src="' . $url . '" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>';
+	}
+
+
+	function ajax_get_code() {
+		header('Content-type: application/json');
+
+		if( isset( $_POST['type'], $_POST['code'] ) ) {
+			if( 'youtube' == $_POST['type'] ) {
+				$response = wp_remote_get( 'http://gdata.youtube.com/feeds/api/videos/' . esc_attr( $_POST['code'] ) . '?alt=json' );
+
+				if( ! is_wp_error( $response ) ) {
+					$response = json_decode( wp_remote_retrieve_body( $response ), true );
+					$image = $response['entry']['media$group']['media$thumbnail'][0]['url'];
+
+					echo json_encode( array( 'success' => true, 'image' => $image ) );
+					die();
+				}
+			}
+		}
+
+		echo json_encode( array( 'success' => false ) );
+		die();
 	}
 }
 

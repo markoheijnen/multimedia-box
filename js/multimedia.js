@@ -275,26 +275,44 @@ jQuery(document).ready(function($) {
 			});
 		}
 
+		function multimedia_ajax_url() {
+			if( typeof ajaxurl != "undefined" ) {
+				return ajaxurl;
+			}
+			
+			return false;
+		}
 
 
 		//Helper functions
 		function multimedia_checkYoutubeCode( popup ) {
 			var youtubeCode = $('.multimedia_box_youtubecode', popup).val();
+			var ajaxurl = multimedia_ajax_url();
+
 			currentImage = null;
 
 			$('.multimedia_box_youtubecode', popup).css('backgroundColor', '#FFFFFF');
 
-			if(youtubeCode) {
-				$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+ youtubeCode +'?alt=json', function(data) {
-					currentImage = data.entry.media$group.media$thumbnail[0].url;
-					$('.multimedia_box_youtubecode', popup).css('backgroundColor', '#99FF99');
+			if( youtubeCode && ajaxurl ) {
+				var data = {
+					action: 'multimedia_get_code',
+					type: 'youtube',
+					code: youtubeCode
+				};
 
-					if( can_close_on_check ) {
-						close_metabox();
-					}	
-				}).error(function() {
-					$('.multimedia_box_youtubecode', popup).css('backgroundColor', '#FF3333');
-				});	
+				$.post( ajaxurl, data, function(response) {
+					if( response.success ) {
+						currentImage = response.image;
+						$('.multimedia_box_youtubecode', popup).css('backgroundColor', '#99FF99');
+
+						if( can_close_on_check ) {
+							close_metabox();
+						}
+					}
+					else {
+						$('.multimedia_box_youtubecode', popup).css('backgroundColor', '#FF3333');
+					}
+				});
 			}
 		}
 
