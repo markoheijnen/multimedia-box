@@ -89,7 +89,7 @@ class Multimedia_Box_Object {
 		if( in_array( 'media', $this->supports ) ) {
 			echo '<div class="multimedia_box_media multimedia_box2">';
 			echo '<h2>' . __( 'Select media item', 'multimedia-box' ) . '</h2>';
-			echo '<p><input type="button" value="' . __( 'Select image', 'multimedia-box' ) . '" name="'. __( 'Select image', 'multimedia-box' ) . '" class="multimedia_box_mediabutton" class="button" /></p>';
+			echo '<p><input type="button" value="' . __( 'Select image', 'multimedia-box' ) . '" name="'. __( 'Select image', 'multimedia-box' ) . '" class="multimedia_box_mediabutton button" /></p>';
 			echo '</div>';
 		}
 
