@@ -204,7 +204,7 @@ jQuery(document).ready(function($) {
 				$('.multimedia_box_unselected', currentBox).show();
 			}
 
-			$( dialog ).dialog( "close" );
+			$( currentDialog ).dialog( "close" );
 		}
 
 		function checkMultimediaSelected( object ) {
