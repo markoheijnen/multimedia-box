@@ -144,8 +144,10 @@ function multimedia_box_register( $args = array() ) {
 	return $GLOBALS['multimedia_box']->register( $args );
 }
 
+/*
 add_action( 'init', 'register_slide_box' );
 function register_slide_box() {
-	multimedia_box_register( array( 'id' => 'slide_test', 'label' => 'Slide test', 'post_type' => 'slide' ) );
+	multimedia_box_register( array( 'id' => 'example', 'label' => 'Example', 'post_type' => 'slide' ) );
 }
+*/
 ?>
