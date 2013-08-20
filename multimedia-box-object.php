@@ -11,11 +11,11 @@ class Multimedia_Box_Object {
 	public $id, $label, $priority, $post_type, $amount, $supports;
 
 	public function __construct( $args ) {
-		add_action( 'add_meta_boxes', array( &$this, 'metabox_add' ) );
-		add_action( 'save_post', array( &$this, 'metabox_save' ) );
+		add_action( 'add_meta_boxes', array( $this, 'metabox_add' ) );
+		add_action( 'save_post', array( $this, 'metabox_save' ) );
 
-		add_action( 'admin_print_styles-post.php', array( &$this, 'load_styles' ) );
-		add_action( 'admin_print_styles-post-new.php', array( &$this, 'load_styles' ) );
+		add_action( 'admin_print_styles-post.php', array( $this, 'load_styles' ) );
+		add_action( 'admin_print_styles-post-new.php', array( $this, 'load_styles' ) );
 
 		$defaults = array(
 			'id' => null,
@@ -40,7 +40,7 @@ class Multimedia_Box_Object {
 
 
 	public function metabox_add( $post_type ) {
-		add_meta_box( 'multimedia_box_' . $this->post_type . '_' . $this->id, $this->label, array( &$this, 'metabox' ), $this->post_type, 'advanced', $this->priority );
+		add_meta_box( 'multimedia_box_' . $this->post_type . '_' . $this->id, $this->label, array( $this, 'metabox' ), $this->post_type, 'advanced', $this->priority );
 	}
 
 	public function metabox( $post ) {
@@ -158,18 +158,21 @@ class Multimedia_Box_Object {
 
 	public function metabox_save( $post_id ) {
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) { return; }
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			return;
 
 		$key = 'multimedia_box_' . $this->post_type . '_' . $this->id;
 		
-		if ( ! isset( $_POST[ $key ] ) || ! wp_verify_nonce( $_POST[ $key ], plugin_basename( __FILE__ ) ) ) { return; }
+		if ( ! isset( $_POST[ $key ] ) || ! wp_verify_nonce( $_POST[ $key ], plugin_basename( __FILE__ ) ) )
+			return;
 
-		if ( ! current_user_can( 'edit_post', $post_id ) ) { return; }
+		if ( ! current_user_can( 'edit_post', $post_id ) )
+			return;
 
 		$array = array();
 
-		if( isset( $_POST[ $this->id.'_imageURL'] ) ) {
-			$object_keys = array_keys( $_POST[ $this->id.'_imageURL'] );
+		if( isset( $_POST[ $this->id . '_imageURL' ] ) ) {
+			$object_keys = array_keys( $_POST[ $this->id . '_imageURL' ] );
 	
 			if( is_array( $object_keys ) ) {
 				foreach( $object_keys as $object_key ) {

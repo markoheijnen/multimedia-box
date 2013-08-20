@@ -4,7 +4,7 @@ Donate link: http://wp-rockstars.com/plugins/multimedia-box/
 Tags: edit, admin, post, page, posts
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 0.1
+Stable tag: 0.2
 
 Enable an API to register multimedia box for a specific post type
 

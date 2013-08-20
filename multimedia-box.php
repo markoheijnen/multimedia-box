@@ -1,13 +1,13 @@
 <?php
 /**
  * @package Multimedia Box
- * @version 0.1
+ * @version 0.2
  */
 /*
 Plugin Name: Multimedia Box
 Plugin URI:  http://markoheijnen.com
 Description: This plugin allows you to add multiple media items to a post without adding it to the content of your post
-Version: 0.1
+Version: 0.2
 Author: Marko Heijnen
 Author URI: http://markoheijnen.com
 */
@@ -16,10 +16,10 @@ require_once 'multimedia-box-object.php';
 
 class Multimedia_Box {
 	public function __construct() {
-		add_action( 'init', array( &$this, 'register_styles_scripts' ), 1 );
+		add_action( 'init', array( $this, 'register_styles_scripts' ), 1 );
 
-		add_action( 'wp_ajax_multimedia_get_code', array( &$this, 'ajax_get_code' ) );
-		add_action( 'wp_ajax_nopriv_multimedia_get_code', array( &$this, 'ajax_get_code' ) );
+		add_action( 'wp_ajax_multimedia_get_code', array( $this, 'ajax_get_code' ) );
+		add_action( 'wp_ajax_nopriv_multimedia_get_code', array( $this, 'ajax_get_code' ) );
 	}
 
 	public function register_styles_scripts() {
