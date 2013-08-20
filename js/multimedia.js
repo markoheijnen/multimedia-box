@@ -19,24 +19,7 @@ jQuery(document).ready(function($) {
 		set_vars();
 
 		function initialize() {
-			//Logic when media item is selected
-			window.multimedia_send_to_editor = window.send_to_editor;
-			window.send_to_editor = function( html ) {
-				if (currentDialog) {
-					currentImage = jQuery('img',html).attr('src');
-					var imgClass = jQuery('img',html).attr('class');
-					imageID = imgClass.substring(imgClass.lastIndexOf('wp-image-')+9);
-
-					tb_remove();
-					$( currentDialog ).parent().show();
-					$(".ui-widget-overlay").show();
-				} else {
-					window.multimedia_send_to_editor(html);
-				}
-			}
-
 			//Remove logic
-
 			$( '.addnew' ).click(function( evt ) {
 				evt.preventDefault();
 				evt.stopPropagation();
@@ -224,6 +207,8 @@ jQuery(document).ready(function($) {
 
 
 		function enableMedia( popup ) {
+			var multimedia_image_frame;
+
 			$( '.multimedia_box_media', popup ).click(function( evt ) {
 				$( '.multimedia_box_media', popup ).addClass('selected');
 			});
@@ -231,18 +216,36 @@ jQuery(document).ready(function($) {
 			$( '.multimedia_box_mediabutton', popup ).click(function( evt ) {
 				evt.preventDefault();
 
-				var url = 'wp-admin/media-upload.php?type=image&amp;TB_iframe=true';
-				if( typeof userSettings != "undefined" ) {
-					url = userSettings.url + url;
-				}
-				else if( typeof multimedia_box != "undefined" ) {
-					url = multimedia_box.url + url;
+				var $el = $(this);
+
+				// If the media frame already exists, reopen it.
+				if ( multimedia_image_frame ) {
+					multimedia_image_frame.open();
+					return;
 				}
 
-				tb_show('Select Image', url);
+				// Create the media frame.
+				multimedia_image_frame = wp.media({
+					// Set the title of the modal.
+					title: $el.data('choose'),
 
-				$( popup ).parent().hide();
-				$(".ui-widget-overlay").hide();
+					// Tell the modal to show only images.
+					library: {
+						type: 'image'
+					},
+				});
+
+				// When an image is selected, run a callback.
+				multimedia_image_frame.on( 'select', function() {
+					// Grab the selected attachment.
+					var attachment = multimedia_image_frame.state().get('selection').first(),
+						imageUrl = attachment.get('url');
+
+					imageID = attachment.id;
+					currentImage = imageUrl;
+				});
+
+				multimedia_image_frame.open();
 			});
 		}
 

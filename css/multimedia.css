@@ -12,3 +12,6 @@
 .multimedia_box_youtube { }
 
 .multimedia_box_bottom { clear:both; padding-top: 5px; text-align: center; }
+
+.wp-dialog { z-index:1002 !important; }
+.ui-widget-overlay { z-index:1001 !important; }
