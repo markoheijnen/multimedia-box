@@ -18,6 +18,7 @@ class Multimedia_Box {
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_styles_scripts' ), 1 );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 9, 2 );
 
 		add_action( 'wp_ajax_multimedia_get_code', array( $this, 'ajax_get_code' ) );
 		add_action( 'wp_ajax_nopriv_multimedia_get_code', array( $this, 'ajax_get_code' ) );
@@ -26,6 +27,19 @@ class Multimedia_Box {
 	public function register_styles_scripts() {
 		wp_register_style( 'multimedia-box', plugins_url( 'css/multimedia.css', __FILE__ ), array( 'wp-jquery-ui-dialog', 'thickbox' ), '1.0' );
 		wp_register_script( 'multimedia-box', plugins_url( 'js/multimedia.js', __FILE__ ), array( 'jquery-ui-dialog', 'thickbox' ), '1.0' );
+	}
+
+
+	public function add_meta_boxes( $post_type, $post ) {
+		/**
+		 * Fires after all built-in meta boxes have been added.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string  $post_type Post type.
+		 * @param WP_Post $post      Post object.
+		 */
+		do_action( 'multimedia_box_register', $post_type, $post );
 	}
 
 
@@ -145,7 +159,7 @@ function multimedia_box_register( $args = array() ) {
 }
 
 /*
-add_action( 'init', 'register_slide_box' );
+add_action( 'multimedia_box_register', 'register_slide_box' );
 function register_slide_box() {
 	multimedia_box_register( array( 'id' => 'example', 'label' => 'Example', 'post_type' => 'slide' ) );
 }
