@@ -18,7 +18,7 @@ class Multimedia_Box {
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_styles_scripts' ), 1 );
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 9, 2 );
+		add_action( 'admin_init', array( $this, 'add_meta_boxes' ) );
 
 		add_action( 'wp_ajax_multimedia_get_code', array( $this, 'ajax_get_code' ) );
 		add_action( 'wp_ajax_nopriv_multimedia_get_code', array( $this, 'ajax_get_code' ) );
@@ -30,7 +30,7 @@ class Multimedia_Box {
 	}
 
 
-	public function add_meta_boxes( $post_type, $post ) {
+	public function add_meta_boxes() {
 		/**
 		 * Fires after all built-in meta boxes have been added.
 		 *
@@ -39,7 +39,7 @@ class Multimedia_Box {
 		 * @param string  $post_type Post type.
 		 * @param WP_Post $post      Post object.
 		 */
-		do_action( 'multimedia_box_register', $post_type, $post );
+		do_action( 'multimedia_box_register' );
 	}
 
 
