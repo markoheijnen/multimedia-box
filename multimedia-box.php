@@ -15,6 +15,7 @@ Author URI: http://markoheijnen.com
 require_once 'multimedia-box-object.php';
 
 class Multimedia_Box {
+
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_styles_scripts' ), 1 );
 
@@ -31,9 +32,10 @@ class Multimedia_Box {
 	public function register( $args = array() ) {
 		// Need these args to be set at a minimum
 		if ( ! isset( $args['id'] ) || ! isset( $args['label'] ) ) {
-			if( defined( 'WP_DEBUG' ) &&  WP_DEBUG ) {
+			if ( defined( 'WP_DEBUG' ) &&  WP_DEBUG ) {
 				trigger_error( sprintf( "The 'label' and 'id' values of the 'args' parameter of '%s::%s()' are required" , __CLASS__ , __FUNCTION__ ) );
 			}
+
 			return false;
 		}
 
@@ -43,13 +45,13 @@ class Multimedia_Box {
 	}
 
 	public function getMedia( $id, $post_id = null ) {
-		if( $post_id == null ) {
+		if ( $post_id == null ) {
 			$post_id = get_the_ID();
 		}
 
 		$media = get_post_meta( $post_id, '_multimedia_box_' . $id, true );
 
-		if( empty( $media ) ) {
+		if ( empty( $media ) ) {
 			$media = array();
 		}
 
@@ -75,12 +77,12 @@ class Multimedia_Box {
 
 		$query = array();
 
-		if( (bool)$args['propose_video'] == false ) { $query['rel'] = 0; }
-		if( (bool)$args['show_hd'] == true ) { $query['hd'] = 1; }
-		if( (bool)$args['autoplay'] == true ) { $query['autoplay'] = 1; }
-		if( (bool)$args['showinfo'] == false ) { $query['showinfo'] = 0; }
-		if( (bool)$args['border'] == true ) { $query['border'] = 1; }
-		if( $args['theme'] == 'light' ) { $query['theme'] = 'light'; }
+		if ( (bool)$args['propose_video'] == false ) { $query['rel'] = 0; }
+		if ( (bool)$args['show_hd'] == true ) { $query['hd'] = 1; }
+		if ( (bool)$args['autoplay'] == true ) { $query['autoplay'] = 1; }
+		if ( (bool)$args['showinfo'] == false ) { $query['showinfo'] = 0; }
+		if ( (bool)$args['border'] == true ) { $query['border'] = 1; }
+		if ( $args['theme'] == 'light' ) { $query['theme'] = 'light'; }
 
 		$url .= '?' . http_build_query( $query, '', '&amp;' );
 
@@ -98,17 +100,15 @@ class Multimedia_Box {
 			'color'        => null
 		);
 
-		$args = wp_parse_args( $args, $defaults );
-
-		$url = 'http://player.vimeo.com/video/' . $code;
-
+		$args  = wp_parse_args( $args, $defaults );
+		$url   = 'http://player.vimeo.com/video/' . $code;
 		$query = array();
 
-		if( (bool)$args['autoplay'] == true ) { $query['autoplay'] = 1; }
-		if( (bool)$args['show_potrait'] == false ) { $query['potreit'] = 0; }
-		if( (bool)$args['show_title'] == false ) { $query['title'] = 0; }
-		if( (bool)$args['show_byline'] == false ) { $query['byline'] = 0; }
-		if( !empty($args['color']) ) { $query['color'] = $args['color']; }
+		if ( (bool)$args['autoplay'] == true ) { $query['autoplay'] = 1; }
+		if ( (bool)$args['show_potrait'] == false ) { $query['potreit'] = 0; }
+		if ( (bool)$args['show_title'] == false ) { $query['title'] = 0; }
+		if ( (bool)$args['show_byline'] == false ) { $query['byline'] = 0; }
+		if ( ! empty( $args['color'] ) ) { $query['color'] = $args['color']; }
 
 		$url .= '?' . http_build_query( $query, '', '&amp;' );	
 
@@ -119,11 +119,11 @@ class Multimedia_Box {
 	function ajax_get_code() {
 		header('Content-type: application/json');
 
-		if( isset( $_POST['type'], $_POST['code'] ) ) {
-			if( 'youtube' == $_POST['type'] ) {
+		if ( isset( $_POST['type'], $_POST['code'] ) ) {
+			if ( 'youtube' == $_POST['type'] ) {
 				$response = wp_remote_get( 'http://gdata.youtube.com/feeds/api/videos/' . esc_attr( $_POST['code'] ) . '?alt=json' );
 
-				if( ! is_wp_error( $response ) ) {
+				if ( ! is_wp_error( $response ) ) {
 					$response = json_decode( wp_remote_retrieve_body( $response ), true );
 					$image = $response['entry']['media$group']['media$thumbnail'][0]['url'];
 
@@ -150,4 +150,3 @@ function register_slide_box() {
 	multimedia_box_register( array( 'id' => 'example', 'label' => 'Example', 'post_type' => 'slide' ) );
 }
 */
-?>
