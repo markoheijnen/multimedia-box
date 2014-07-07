@@ -58,7 +58,7 @@ class Multimedia_Box {
 		return true;
 	}
 
-	public function getMedia( $id, $post_id = null ) {
+	public static function get_media( $id, $post_id = null ) {
 		if ( $post_id == null ) {
 			$post_id = get_the_ID();
 		}
@@ -72,7 +72,7 @@ class Multimedia_Box {
 		return $media;
 	}
 
-	public function getYoutubeHTML( $code, $args ) {
+	public function get_youtube_html( $code, $args ) {
 		$defaults = array(
 			'height'        => 315,
 			'width'         => 560,
@@ -103,7 +103,7 @@ class Multimedia_Box {
 		return '<iframe width="' . intval( $args['width'] ) . '" height="' . intval( $args['height'] ) . '" src="' . $url . '" frameborder="0" webkitallowfullscreen allowfullscreen></iframe>';
 	}
 
-	public function getVimeoHTML( $code, $args ) {
+	public function get_vimeo_html( $code, $args ) {
 		$defaults = array(
 			'height'       => 315,
 			'width'        => 560,
@@ -130,7 +130,7 @@ class Multimedia_Box {
 	}
 
 
-	function ajax_get_code() {
+	public function ajax_get_code() {
 		header('Content-type: application/json');
 
 		if ( isset( $_POST['type'], $_POST['code'] ) ) {
@@ -150,6 +150,7 @@ class Multimedia_Box {
 		echo json_encode( array( 'success' => false ) );
 		die();
 	}
+
 }
 
 $GLOBALS['multimedia_box'] = new Multimedia_Box();
